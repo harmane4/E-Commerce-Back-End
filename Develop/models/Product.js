@@ -36,7 +36,10 @@ Product.init(
     },
     category_id: {
       type: DataTypes.INTEGER,
-      foreignKey: "category_id",
+      references: {
+        model: "category",
+        key: "id",
+      },
     },
   },
   {
