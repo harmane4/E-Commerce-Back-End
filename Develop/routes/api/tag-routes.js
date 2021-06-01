@@ -1,11 +1,10 @@
 const router = require("express").Router();
 const { response } = require("express");
-const { DataTypes } = require("sequelize/types");
 const { Tag, Product, ProductTag } = require("../../models");
 
 // The `/api/tags` endpoint
 
-router.get("/", (request, response) => {
+router.get("/", async (request, response) => {
   // find all tags
   try {
     const tagData = await Tag.findAll({
@@ -32,7 +31,7 @@ router.get("/", (request, response) => {
   }
 });
 
-router.get("/:id", (request, response) => {
+router.get("/:id", async (request, response) => {
   // find a single tag by its `id`
   try {
     const tagData = await Tag.findByPk(request.params.id, {
@@ -59,7 +58,7 @@ router.get("/:id", (request, response) => {
   }
 });
 
-router.post("/", (request, response) => {
+router.post("/", async (request, response) => {
   // create a new tag
   try {
     const tagData = await Tag.create({
@@ -71,7 +70,7 @@ router.post("/", (request, response) => {
   }
 });
 
-router.put("/:id", (request, response) => {
+router.put("/:id", async (request, response) => {
   // update a tag's name by its `id` value
   try {
     const tagData = await Tag.update({
@@ -89,7 +88,7 @@ router.put("/:id", (request, response) => {
   }
 });
 
-router.delete("/:id", (request, response) => {
+router.delete("/:id", async (request, response) => {
   // delete on tag by its `id` value
   try {
     const tagData = await Tag.destroy({
