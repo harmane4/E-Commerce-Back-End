@@ -9,16 +9,7 @@ router.get("/", async (request, response) => {
   try {
     const categoryData = await Category.findAll({
       // be sure to include its associated Products
-      include: [
-        {
-          model: Product,
-          attributes: id,
-          product_name,
-          price,
-          stock,
-          category_id,
-        },
-      ],
+      include: [{ model: Product }],
     });
     response.status(200).json(categoryData);
   } catch (error) {
@@ -34,11 +25,6 @@ router.get("/:id", async (request, response) => {
       include: [
         {
           model: Product,
-          attributes: id,
-          product_name,
-          price,
-          stock,
-          category_id,
         },
       ],
     });
