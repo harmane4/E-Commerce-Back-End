@@ -9,21 +9,7 @@ router.get("/", async (request, response) => {
   try {
     const tagData = await Tag.findAll({
       // be sure to include its associated Product data
-      include: [
-        {
-          model: Product,
-          attributes: id,
-          product_name,
-          price,
-          stock,
-          category_id,
-        },
-        {
-          model: ProductTag,
-          attributes: id,
-          product_id,
-        },
-      ],
+      include: [{ model: Product }],
     });
     response.status(200).json(tagData);
   } catch (error) {
@@ -39,16 +25,6 @@ router.get("/:id", async (request, response) => {
       include: [
         {
           model: Product,
-          attributes: id,
-          product_name,
-          price,
-          stock,
-          category_id,
-        },
-        {
-          model: ProductTag,
-          attributes: id,
-          product_id,
         },
       ],
     });
@@ -79,7 +55,7 @@ router.put("/:id", async (request, response) => {
       },
     });
     if (!tagData) {
-      response.status(404).json({ message: "No category found with that id" });
+      response.status(404).json({ message: "No tag found with that id" });
       return;
     }
     response.status(200).json(tagData);
@@ -97,7 +73,7 @@ router.delete("/:id", async (request, response) => {
       },
     });
     if (!tagData) {
-      response.status(404).json({ message: "No category found with that id" });
+      response.status(404).json({ message: "No tag found with that id" });
       return;
     }
     response.status(200).json(tagData);
