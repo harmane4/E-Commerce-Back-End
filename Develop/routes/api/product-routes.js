@@ -33,12 +33,7 @@ router.get("/:id", async (request, response) => {
 });
 
 // create new product
-router.post("/", async (request, response) => {
-  //   product_name: pr
-  //   price: 200.0;
-  //   stock: 3;
-  //   tagIds: [1, 2, 3, 4];
-
+router.post("/", (request, response) => {
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -70,7 +65,7 @@ router.post("/", async (request, response) => {
 });
 
 // update product
-router.put("/:id", async (request, response) => {
+router.put("/:id", (request, response) => {
   // update product data
   Product.update(request.body, {
     where: {
@@ -114,7 +109,7 @@ router.put("/:id", async (request, response) => {
 router.delete("/:id", async (request, response) => {
   // delete one product by its `id` value
   try {
-    const productData = await Tag.destroy({
+    const productData = await Product.destroy({
       where: {
         id: request.params.id,
       },
